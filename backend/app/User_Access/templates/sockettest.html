@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Flask-SocketIO Test</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.min.js" integrity="sha512-gfppNkmmwLyyV/BXmzS9uWWbjxe0owp9N3wx9NeGmIHkFOiRM0EMmQte753JyYZd9uzIbjuSqPOvME0SvADXhw==" crossorigin="anonymous"></script>
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function(){
+                var socket = io.connect();
+                socket.on('status_response', function(msg) {
+                    var date = new Date();
+                    $('#status').append('<p>status: ' + msg.data + "Time:"+ date+ '</p>');
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="status"></div>
+        
+    </body>
+</html>

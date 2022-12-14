@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+    .container {
+    	position: fixed;
+	    width: 924px;
+	    height: 973px;
+	}
+	.box {
+	    position: absolute;
+	    height: 90vh;
+        width: 100%;
+	}
+	.box li{
+	    position: fixed;
+	    float: left;
+	    width: 165px;
+	    height: 165px;
+	    margin-left: -1px;
+	    border: 1px solid #000;
+	    line-height: 150px;
+	    text-align: center;
+	    list-style: none;
+	}
+
+    #AQI_Index{
+        position: fixed;
+        left: 1000px;
+        top: 500px;
+    }
+	
+	/*vvvvvvvvvvvvv box1~ vvvvvvvvvvvvvvv*/
+	#li2 {
+	    left: 206px;
+	}
+	#li3 {
+	    left: 372px;
+	}
+	#li4 {
+	    left: 538px;
+	}
+	#li5 {
+	    left: 704px;
+	}
+	#li6 {
+	    top: 182px;
+	    left: 40px;
+	}
+	#li7 {
+	    top: 182px;
+	    left: 206px;
+	}
+	#li8 {
+	    top: 182px;
+	    left: 372px;
+	}
+	#li9 {
+	    top: 182px;
+	    left: 538px;
+	}
+	#li10 {
+	    top: 182px;
+	    left: 704px;
+	}
+	#li11 {
+	    top: 348px;
+	    left: 40px;
+	}
+	#li12 {
+	    top: 348px;
+	    left: 206px;
+	}
+	#li13 {
+	    top: 348px;
+	    left: 372px;
+	}
+	#li14 {
+	    top: 348px;
+	    left: 538px;
+	}
+	#li15 {
+	    top: 348px;
+	    left: 704px;
+	}
+	#li16 {
+	    top: 514px;
+	    left: 40px;
+	}
+	#li17 {
+	    top: 514px;
+	    left: 206px;
+	}
+	#li18 {
+	    top: 514px;
+	    left: 372px;
+	}
+	#li19 {
+	    top: 514px;
+	    left: 538px;
+	}
+	#li20 {
+	    top: 514px;
+	    left: 704px;
+	}
+	#li21 {
+	    top: 680px;
+	    left: 40px;
+	}
+	#li22 {
+	    top: 680px;
+	    left: 206px;
+	}
+	#li23 {
+	    top: 680px;
+	    left: 372px;
+	}
+	#li24 {
+	    top: 680px;
+	    left: 538px;
+	}
+	#li25 {
+	    top: 680px;
+	    left: 704px;
+	}
+	/*vvvvvvvvvvvvv box25~ vvvvvvvvvvvvvvv*/
+	
+    #map {
+            position: fixed;
+            height: 843px;
+            width: 893px;
+        }
+        #mesh {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            z-index: 2;
+            left: 0px;
+            top: 0px;
+            opacity:.2;
+        }
+        table{
+            height: 100%;
+	    width: 100%;
+            border: 2px solid #000;
+            border-collapse:collapse;
+        }
+        td{
+            border: 1px solid #000;
+	    background-color: #33cd5f;
+	    opacity:.5;
+        }
+
+	.w-comb {
+	    background-color: red;
+	    display: inline-block;
+	    position: relative;
+	}
+
+	.w-comb-sub1,.w-comb-sub2 {
+	    background-color: red;
+	    position: absolute;
+	    width: inherit;
+	    height: inherit;
+	}
+	
+	.w-comb-sub1 {
+	    transform: rotate(-60deg);
+	}
+	
+	.w-comb-sub2 {
+	    transform: rotate(60deg);
+	}
+	
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    <!--<img id="fake_map" src="{{ url_for('user_access.static', filename='images/fakemap.png') }}">-->
+    <div id="map"></div>
+
+    <img id="AQI_Index" src="{{ url_for('user_access.static', filename='images/AQI_Level.png') }}">
+
+    
+    <div id="mesh">
+        <!--<ul class="box">
+	    <li id="li1">1</li>  <li id="li2">2</li2>  <li id="li3">3</li>  <li id="li4">4</li>  <li id="li5">5</li>
+	    <li id="li6">6</li>  <li id="li7">7</li7>  <li id="li8">8</li>  <li id="li9">9</li>  <li id="li10">10</li>
+	    <li id="li11">11</li>  <li id="li12">12</li>  <li id="li13">13</li>  <li id="li14">14</li>  <li id="li15">15</li>
+	    <li id="li16">16</li>  <li id="li17">17</li>  <li id="li18">18</li>  <li id="li19">19</li>  <li id="li20">20</li>
+	    <li id="li21">21</li>  <li id="li22">22</li>  <li id="li23">23</li>  <li id="li24">24</li>  <li id="li25">25</li>
+        </ul>-->
+        <ul class="box">
+	    <li id="li1"></li>  <li id="li2"></li2>  <li id="li3"></li>  <li id="li4"></li>  <li id="li5"></li>
+	    <li id="li6"></li>  <li id="li7"></li7>  <li id="li8"></li>  <li id="li9"></li>  <li id="li10"></li>
+	    <li id="li11"></li>  <li id="li12"></li>  <li id="li13"></li>  <li id="li14"></li>  <li id="li15"></li>
+	    <li id="li16"></li>  <li id="li17"></li>  <li id="li18"></li>  <li id="li19"></li>  <li id="li20"></li>
+	    <li id="li21"></li>  <li id="li22"></li>  <li id="li23"></li>  <li id="li24"></li>  <li id="li25"></li>
+        </ul>
+	<!--<ul class="box">
+	    <li1>1</li1><li1>2</li1><li1>3</li1><li1>4</li1><li1>5</li1>
+	    <li1></li1><li1></li1><li1></li1><li1></li1><li1></li1>
+	    <li1></li1><li1></li1><li1></li1><li1></li1><li1></li1>
+	    <li1></li1><li1></li1><li1></li1><li1></li1><li1></li1>
+	    <li1></li1><li1></li1><li1></li1><li1></li1><li1></li1>
+        </ul>-->
+        <!--<table>
+            {% for i in range(9) %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </table>-->
+    </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    <script>
+        var marker;
+        var marker1;
+        var marker_move1, marker_move2;
+        var next_marker;
+        var map;
+        var uluru=[26];
+        //vvvvvvvvvvvvv location~ vvvvvvvvvvvvvvv
+        // 中正：23.563145, 120.472744
+        // 東大：22.7365759, 121.0657083
+        // 中正北邊的鳳梨田：23.5757884, 120.4694816
+
+        uluru[0] = { lat: 23.5757884 , lng: 120.4694816 };//middle
+        
+        uluru[ 1 ] = { lat: 23.5790762 , lng: 120.4658943 };
+        uluru[ 2 ] = { lat: 23.5790762 , lng: 120.467688 };
+        uluru[ 3 ] = { lat: 23.5790762 , lng: 120.4694816 };
+        uluru[ 4 ] = { lat: 23.5790762 , lng: 120.4712752 };
+        uluru[ 5 ] = { lat: 23.5790762 , lng: 120.4730689 };
+        uluru[ 6 ] = { lat: 23.5774323 , lng: 120.4658943 };
+        uluru[ 7 ] = { lat: 23.5774323 , lng: 120.467688 };
+        uluru[ 8 ] = { lat: 23.5774323 , lng: 120.4694816 };
+        uluru[ 9 ] = { lat: 23.5774323 , lng: 120.4712752 };
+        uluru[ 10 ] = { lat: 23.5774323 , lng: 120.4730689 };
+        uluru[ 11 ] = { lat: 23.5757884 , lng: 120.4658943 };
+        uluru[ 12 ] = { lat: 23.5757884 , lng: 120.467688 };
+        uluru[ 13 ] = { lat: 23.5757884 , lng: 120.4694816 };
+        uluru[ 14 ] = { lat: 23.5757884 , lng: 120.4712752 };
+        uluru[ 15 ] = { lat: 23.5757884 , lng: 120.4730689 };
+        uluru[ 16 ] = { lat: 23.5741445 , lng: 120.4658943 };
+        uluru[ 17 ] = { lat: 23.5741445 , lng: 120.467688 };
+        uluru[ 18 ] = { lat: 23.5741445 , lng: 120.4694816 };
+        uluru[ 19 ] = { lat: 23.5741445 , lng: 120.4712752 };
+        uluru[ 20 ] = { lat: 23.5741445 , lng: 120.4730689 };
+        uluru[ 21 ] = { lat: 23.5725006 , lng: 120.4658943 };
+        uluru[ 22 ] = { lat: 23.5725006 , lng: 120.467688 };
+        uluru[ 23 ] = { lat: 23.5725006 , lng: 120.4694816 };
+        uluru[ 24 ] = { lat: 23.5725006 , lng: 120.4712752 };
+        uluru[ 25 ] = { lat: 23.5725006 , lng: 120.4730689 };
+        //^^^^^^^^^^^^^ ~location ^^^^^^^^^^^^^^^
+        
+        var uluru_move = uluru[1];
+        var mesh = document.getElementById("mesh");
+        
+        var color1 = '#33cd5f'; //AQI1   //lime #00ff00
+        var color2 = '#ffff00'; //AQI2
+        var color3 = '#ffa500'; //AQI3
+        var color4 = '#fa8072'; //AQI4
+        var color5 = '#da70d6'; //AQI5
+        var color6 = '#800000'; //AQI6
+        
+        function initMap() {
+            
+            /*document.getElementById('li1').style.backgroundColor = color1;//改變特定某一格box的顏色
+            document.getElementById('li2').style.backgroundColor = color2;
+            document.getElementById('li3').style.backgroundColor = color3;
+            document.getElementById('li4').style.backgroundColor = color4;
+            document.getElementById('li5').style.backgroundColor = color5;
+            document.getElementById('li6').style.backgroundColor = color6;*/
+            
+            /*document.getElementById('li13').style.backgroundColor = color2;//middle
+            document.getElementById('li8').style.backgroundColor = color1;//top
+            document.getElementById('li14').style.backgroundColor = color1;//right
+            document.getElementById('li18').style.backgroundColor = color1;//buttom
+            document.getElementById('li12').style.backgroundColor = color1;//left*/
+            
+            
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 17,
+                center: uluru[0],
+                scaleControl: true,
+                mapTypeControl: false,
+                zoomControl: false,
+                streetViewControl: false,
+                fullscreenControl: false
+            });
+            
+            mesh.addEventListener("click", function(){move()}, false);
+
+            infow = new google.maps.InfoWindow({
+                content: 'UAV2'
+            });
+
+            next_marker = new google.maps.Marker({
+                position: uluru[1],
+                map: map
+            });
+            
+            //show all 25 waypoint
+            /*for(var i=1;i<=25;i++){
+                marker = new google.maps.Marker({
+                    position: uluru[i],
+                    map: map
+                });
+            }*/
+            move();
+        }
+        
+        function delay(n){
+            return new Promise(function(resolve){
+                setTimeout(resolve,n*1000);
+            });
+        }
+
+        uluru_now = uluru[13];
+        var dlat = (uluru[13].lat - uluru[1].lat) / 100;
+        var dlng = (uluru[13].lng - uluru[1].lng) / 100;
+        var first = false;
+        var second = false;
+        var dmove = 60;
+
+        var now,target;
+        var flag=[];
+
+        function mtp(now, target){//move to point
+            uluru_now = uluru[now];
+            uluru_move = uluru[now];
+            dlat = (uluru[now].lat - uluru[target].lat) / dmove;
+            dlng = (uluru[now].lng - uluru[target].lng) / dmove;
+        }
+
+        var mt;
+        
+        async function add_marker(mt){
+            //await  delay(0.2);
+            next_marker.setMap(null);
+            next_marker = new google.maps.Marker({
+                position: uluru[mt]
+                ,map: map
+            });
+            //await  delay(0.00001);
+        }
+
+
+        async function move(){
+            mesh.removeEventListener("click", function(){move()}, false);
+            while(1){
+                await  delay(0.02);
+                uluru_now.lat -= dlat;
+                uluru_now.lng -= dlng;
+                
+                var marker_temp = marker_move1;
+                marker_move1 = new google.maps.Marker({
+                    position: uluru_now
+                    ,map: map
+                    ,icon: "{{ url_for('user_access.static', filename='images/drone_re.png') }}"//flask
+                    //,icon: "drone_re.png"
+                });
+                await  delay(0.02);
+                marker_temp.setMap(null);
+                
+                
+                //1 -> 5 -> 10 -> 6 -> 11 -> 15 -> 20 -> 16 -> 21 -> 25
+                if(Math.abs(uluru_now.lng - uluru[1].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[1].lat) <= 0.0001){
+                    document.getElementById('li1').style.backgroundColor = color1;
+                    mtp(1,2);
+                    if(!flag[1])
+                        add_marker(2);
+                    first = true;
+                    flag[1] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[2].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[2].lat) <= 0.0001){
+                    document.getElementById('li2').style.backgroundColor = color1;
+                    mtp(2,3);
+                    if(!flag[2])
+                        add_marker(3);
+                    flag[2] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[3].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[3].lat) <= 0.0001){
+                    document.getElementById('li3').style.backgroundColor = color1;
+                    mtp(3,4);
+                    if(!flag[3])
+                        add_marker(4);
+                    flag[3] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[4].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[4].lat) <= 0.0001){
+                    document.getElementById('li4').style.backgroundColor = color1;
+                    mtp(4,5);
+                    if(!flag[4])
+                        add_marker(5);
+                    flag[4] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[5].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[5].lat) <= 0.0001){
+                    document.getElementById('li5').style.backgroundColor = color1;
+                    mtp(5,10);
+                    if(!flag[5])
+                        add_marker(10);
+                    flag[5] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[10].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[10].lat) <= 0.0001){
+                    document.getElementById('li10').style.backgroundColor = color1;
+                    mtp(10,9);
+                    if(!flag[10])
+                        add_marker(9);
+                    flag[10] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[9].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[9].lat) <= 0.0001){
+                    document.getElementById('li9').style.backgroundColor = color1;
+                    mtp(9,8);
+                    if(!flag[9])
+                        add_marker(8);
+                    flag[9] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[8].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[8].lat) <= 0.0001){
+                    document.getElementById('li8').style.backgroundColor = color1;
+                    mtp(8,7);
+                    if(!flag[8])
+                        add_marker(7);
+                    flag[8] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[7].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[7].lat) <= 0.0001 && first){
+                    document.getElementById('li7').style.backgroundColor = color2;
+                    mtp(7,6);
+                    if(!flag[7])
+                        add_marker(6);
+                    flag[7] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[6].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[6].lat) <= 0.0001){
+                    document.getElementById('li6').style.backgroundColor = color2;
+                    mtp(6,11);
+                    if(!flag[6])
+                        add_marker(11);
+                    flag[6] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[11].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[11].lat) <= 0.0001){
+                    document.getElementById('li11').style.backgroundColor = color2;
+                    mtp(11,12);
+                    if(!flag[11])
+                        add_marker(12);
+                    flag[11] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[12].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[12].lat) <= 0.0001){
+                    document.getElementById('li12').style.backgroundColor = color2;
+                    mtp(12,0);
+                    if(!flag[12])
+                        add_marker(0);
+                    second = true;
+                    flag[12] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[0].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[0].lat) <= 0.0001 && first && second){
+                    document.getElementById('li13').style.backgroundColor = color2;
+                    mtp(0,14);
+                    if(!flag[13])
+                        add_marker(14);
+                    flag[13] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[14].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[14].lat) <= 0.0001){
+                    document.getElementById('li14').style.backgroundColor = color1;
+                    mtp(14,15);
+                    if(!flag[14])
+                        add_marker(15);
+                    flag[14] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[15].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[15].lat) <= 0.0001){
+                    document.getElementById('li15').style.backgroundColor = color1;
+                    mtp(15,20);
+                    if(!flag[15])
+                        add_marker(20);
+                    flag[15] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[20].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[20].lat) <= 0.0001){
+                    document.getElementById('li20').style.backgroundColor = color1;
+                    mtp(20,19);
+                    if(!flag[20])
+                        add_marker(19);
+                    flag[20] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[19].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[19].lat) <= 0.0001){
+                    document.getElementById('li19').style.backgroundColor = color2;
+                    mtp(19,18);
+                    if(!flag[19])
+                        add_marker(18);
+                    flag[19] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[18].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[18].lat) <= 0.0001){
+                    document.getElementById('li18').style.backgroundColor = color2;
+                    mtp(18,17);
+                    if(!flag[18])
+                        add_marker(17);
+                    flag[18] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[17].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[17].lat) <= 0.0001){
+                    document.getElementById('li17').style.backgroundColor = color2;
+                    mtp(17,16);
+                    if(!flag[17])
+                        add_marker(16);
+                    flag[17] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[16].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[16].lat) <= 0.0001){
+                    document.getElementById('li16').style.backgroundColor = color1;
+                    mtp(16,21);
+                    if(!flag[16])
+                        add_marker(21);
+                    flag[16] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[21].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[21].lat) <= 0.0001){
+                    document.getElementById('li21').style.backgroundColor = color1;
+                    mtp(21,22);
+                    if(!flag[21])
+                        add_marker(22);
+                    flag[21] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[22].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[22].lat) <= 0.0001){
+                    document.getElementById('li22').style.backgroundColor = color1;
+                    mtp(22,23);
+                    if(!flag[22])
+                        add_marker(23);
+                    flag[22] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[23].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[23].lat) <= 0.0001){
+                    document.getElementById('li23').style.backgroundColor = color2;
+                    mtp(23,24);
+                    if(!flag[23])
+                        add_marker(24);
+                    flag[23] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[24].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[24].lat) <= 0.0001){
+                    document.getElementById('li24').style.backgroundColor = color2;
+                    mtp(24,25);
+                    if(!flag[24])
+                        add_marker(25);
+                    flag[24] = true;
+                }
+                if(Math.abs(uluru_now.lng - uluru[25].lng) <= 0.0001 && Math.abs(uluru_now.lat - uluru[25].lat) <= 0.0001 ){
+                    document.getElementById('li25').style.backgroundColor = color2;
+                    dmove = 100;
+                    mtp(25,12);
+                    next_marker.setMap(null);
+                    //flag[25] = true;
+                }
+            }
+            
+            
+            /*google.maps.event.removeListener(map, 'click', function (event) {
+                move();
+            });*/
+            //mesh.removeEventListener("click", function(){move()}, false);
+        }
+        
+        
+    </script>
+    <!--<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD881X0B3EhBXb0yoTsTR8hUBzqIsX5orU&callback=initMap">
+    </script>-->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiXMiVBSm4BzoAX33MXCY9fUnCh4fDApY&callback=initMap">
+    </script>
+</body>
+
+</html>

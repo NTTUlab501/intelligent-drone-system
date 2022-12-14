@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{%- block styles %}
+
+<link rel="stylesheet" href="{{ url_for('user_access.static', filename='css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('user_access.static', filename='css/index.css') }}">
+{%- endblock styles %}
+
+{% block nav -%}
+{{ super() }}
+<button type="button" class="btn btn-default" onclick="plan()">路徑規劃</button>
+{%- endblock nav%}
+
+{% block current_robot -%}
+    {% if not robots['UAV']%}
+        無機器人連接
+    {% elif current_robot %}
+        {{ current_robot }}
+    {% else %}
+        機器人
+    {% endif %}
+{%- endblock current_robot %}
+
+{% block robots -%}
+    {% for UAV in robots['UAV'] %}
+        <a class="dropdown-item" href="{{ url_for('user_access.index', robot_type='UAV', id=UAV['userID'], current_robot =  UAV['userID']) }}">{{ UAV['userID'] }}</a>
+    {% endfor %}
+{%- endblock robots %}
+
+{% block container -%}
+<br>
+<div class="row">
+    <div class="col col-6 col-sm-6 col-md-6 col-lg-6">
+        <h5>空污資訊</h5>
+        <textarea id="chat" cols="80" rows="20">空污資訊:</textarea><br><br>
+      
+        <div id="map"></div>
+        
+        <!--<img id="fake_map" src="{{ url_for('user_access.static', filename='images/googlemap.jpg') }}">-->
+    </div>
+</div>
+{%- endblock container %}
+
+{% block scripts %}
+
+
+
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiXMiVBSm4BzoAX33MXCY9fUnCh4fDApY&callback=initMap">
+</script>
+<script src="{{ url_for('user_access.static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('user_access.static', filename='js/popper.min.js') }}"></script>
+<script src="{{ url_for('user_access.static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('user_access.static', filename='js/socket.io.min.js') }}"></script>
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.min.js"
+    integrity="sha512-gfppNkmmwLyyV/BXmzS9uWWbjxe0owp9N3wx9NeGmIHkFOiRM0EMmQte753JyYZd9uzIbjuSqPOvME0SvADXhw=="
+    crossorigin="anonymous"></script>-->
+<!--<script src="{{ url_for('user_access.static', filename='js/map.js') }}"></script>-->
+
+<script src="{{ url_for('user_access.static', filename='js/index.js') }}"></script>
+<script src="{{ url_for('user_access.static', filename='js/move.js') }}"></script>
+<script src="{{ url_for('user_access.static', filename='js/route_plan.js') }}"></script>
+
+{%- endblock scripts %}

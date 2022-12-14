@@ -1,0 +1,93 @@
+#map {
+    width:45vw;
+    height:45vw;
+    margin: 10px auto;
+}
+
+#fake_map {
+    width:45vw;
+    height:45vw;
+    margin: 10px auto;
+}
+
+
+
+#bluetooth_map {
+    width:45vw;
+    height:45vw;
+    border:3px #000 solid;
+    padding:5px;
+    table-layout:fixed;
+    margin: 10px auto;
+}
+
+#camera {
+    height: 250px;
+    width: 250px;
+    margin: 10px auto;
+    table-layout:fixed;
+}
+
+#control {
+    height: 200px;
+    width: 75%;
+    border:3px lightgray solid;
+    table-layout:fixed;
+    margin: 10px auto;
+}
+
+#button {
+    height: 60px;
+    width: 90%;
+    font-size: 14px;
+}
+
+#stretch {
+    font-size: 14px;
+    height: 30px;
+    width: 100%;
+    background-color: lightgray;
+
+}
+
+@media screen and (max-width: 800px){
+    #camera {
+        height: 160px;
+        width: 160px;
+        margin: 10px auto;
+        table-layout:fixed;
+    }
+
+    #control {
+        height: 100%;
+        width: 360px;
+        border:3px #000 solid;
+        table-layout:fixed;
+        margin: 10px auto;
+    }
+
+    #map {
+        width:40vw;
+        height:40vw;
+        margin: 10px auto;
+    }
+
+    #fake_map {
+        width:40vw;
+        height:40vw;
+        margin: 10px auto;
+    }
+    
+    
+    
+    #bluetooth_map {
+        font-size: 2vw;
+        width:40vw;
+        height:40vw;
+        border:3px #000 solid;
+        padding:5px;
+        table-layout:fixed;
+        margin: 10px auto;
+    }
+}
+

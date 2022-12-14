@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('user_access.static', filename='css/home6.css') }}">
+  </head>
+  <body>
+  <div class="header">
+    <h1>空污偵測系統</h1>
+  </div>
+
+  <div class="topnav">
+    <a href="http://192.168.0.124/car/home4.php" style="float:right"><h3>進階模式-Robot1</h3></a>
+    <a href="http://192.168.0.124/car/home6.php" style="float:right"><h3>進階模式-Robot2</h3></a>
+    <a href="http://192.168.0.124/car/home2.php" style="float:right"><h3>一般模式</h3></a>
+  </div>
+  <div class="row">
+    <div id="status"></div>
+    <div class="card"  style="width:100%;" >
+      <h2>Robot2當前畫面</h2>
+      <iframe name="server" style="display:none;" src="home6.php"></iframe>
+      <form method=POST   action="../cgi-bin/go1.py" target="server">
+      <input type=submit name='back' value='back' style="font-size:20px;height:50px;width:50px">
+      </form>
+      <form method=POST   action="../cgi-bin/1.py" target="server">
+      <table border="0" align="center">
+      
+      
+      </table>
+      </form>	
+      <table border="0" align="center">
+        <th><h3>Robot2 可見光 </h3><iframe src="http://192.168.0.148:8080/" width="250" height="250"></iframe></th>
+      </table>
+    </div>
+    <div class="leftcolumn">
+        <div class="card">
+          <h1>GPS</h1>
+    <span style="font-size:20px">Robot2 : </span>24.9723892,121.1914117<br><span style="font-size:20px">final : </span>24.968001,121.195028<br>     	<iframe
+          width="100%"
+          height="580"
+          frameborder="0" 
+          style="border:0"
+          src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAdVMrMODu3lC5KYhOuNkcat2fY9ljZhzw&zoom=18&origin=22.7365759,121.06507083&destination=22.735663,121.0653819">
+      </iframe>
+      </div>
+    </div>
+  <div class="rightcolumn">
+      <div class="card">
+        <h1>三角定位</h1>
+        <font style="color:#00BBFF;"><span style="font-size:20px">Robot2 座標位置: </span></font>(5.0,8.0)
+        <br>
+        <span style="font-size:20px">受困人員: </span>(6,10)<br>
+        <font style="color:#FFAA33;"><span style="font-size:20px">聲音來源 : </span></font>
+        右<br>
+        <table width="50%" border="1" height="200">
+          <span style="font-size:20px">Robot2 當前位置&聲音方向來源</span>
+          {% for y in range(1,11) %}
+          <tr>
+            {% for x in range(1,11) %}
+              {% if x == 5 and y == 8 %}
+                <td bgcolor="lightblue">({{ x }},{{ y }})</td>
+              {% elif x == 5 and y == 9 %}
+                <td bgcolor="orange">({{ x }},{{ y }})</td>
+              {% else %}
+                <td>({{ x }},{{ y }})</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+        <table width="50%" border="1">
+          <span style="font-size:20px">Robot2 路徑規劃</span>
+          {% for y in range(1,11) %}
+          <tr>
+            {% for x in range(1,11) %}
+              {% if x == 5 and y == 8 %}
+                <td bgcolor="lightblue">({{ x }},{{ y }})</td>
+              {% elif x == 6 and y == 8 %}
+                <td bgcolor="blue">({{ x }},{{ y }})</td>
+              {% elif x == 6 and y == 9 %}
+                <td bgcolor="blue">({{ x }},{{ y }})</td>
+              {% elif x == 6 and y == 10 %}
+                <td bgcolor="black">({{ x }},{{ y }})</td>
+              {% else %}
+                <td>({{ x }},{{ y }})</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>    
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="{{ url_for('user_access.static', filename='js/home6.js') }}"></script>
+  </body>
+</html>

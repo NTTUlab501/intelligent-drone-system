@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #map {
+            height: 90vh;
+            width: 100%;
+        }
+        #mesh {
+            position: absolute;
+            height: 95vh;
+            width: 100%;
+            z-index: 2; 
+            background-color:rgba(0, 26, 255, 0.1);
+            left: 0px;
+            top: 0px;
+        }
+        table{
+            height: 100%;
+            width: 100%;
+            border: 1px solid #000;
+            border-collapse:collapse;
+        }
+        td{
+            border: 1px solid #000;
+        }
+        
+	
+	.color-lump-lv1{
+      width: 80px;
+      height: 80px;
+      background-color: #33cd5f;
+      opacity:.5;
+  }
+  .color-lump-lv2{
+      width: 80px;
+      height: 80px;
+      background-color: #ffff37;
+      opacity:.5;
+  }
+  .color-lump-lv3{
+      width: 80px;
+      height: 80px;
+      background-color: #ff5809;
+      opacity:.5;
+  }
+  .color-lump-lv4{
+      width: 80px;
+      height: 80px;
+      background-color: #ff0000;
+      opacity:.5;
+  }
+  .color-lump-lv5{
+      width: 80px;
+      height: 80px;
+      background-color: #ff0080;
+      opacity:.5;
+  }
+  .color-lump-lv6{
+      width: 80px;
+      height: 80px;
+      background-color: #ae0000;
+      opacity:.5;
+  }
+	.w-comb {
+	    background-color: red;
+	    display: inline-block;
+	    position: relative;
+	}
+
+	.w-comb-sub1,.w-comb-sub2 {
+	    background-color: red;
+	    position: absolute;
+	    width: inherit;
+	    height: inherit;
+	}
+	
+	.w-comb-sub1 {
+	    transform: rotate(-60deg);
+	}
+	
+	.w-comb-sub2 {
+	    transform: rotate(60deg);
+	}
+	
+    </style>
+</head>
+
+<body>
+    
+    
+    <h3></h3>
+    <div id="map"></div>
+    
+    <div class="color-lump"></div>
+    <div id="mesh">
+        <table>
+            {% for i in range(9) %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+    <script>
+        var marker;
+        var marker1;
+        var map;
+        var uluru = { lat: 22.7365759, lng: 121.0657083 };
+        var uluru1 = { lat: 22.7387315, lng: 121.0648241 };
+        var uluru2 = { lat: 22.735663, lng: 121.0653819 };
+        var mesh = document.getElementById("mesh");
+        function initMap() {
+            
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 17,
+                center: uluru,
+                scaleControl: true,
+                mapTypeControl: false,
+                zoomControl: false,
+                streetViewControl: false,
+                fullscreenControl: false
+            });
+            mesh.addEventListener("click", function(){move()}, false);
+            /*google.maps.event.addListener(map, 'click', function (event) {
+                move();
+            });*/
+
+            marker = new google.maps.Marker({
+                position: uluru1,
+                map: map
+            });
+
+            marker1 = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+        }
+        
+        function delay(n){
+            return new Promise(function(resolve){
+                setTimeout(resolve,n*1000);
+            });
+        }
+
+        uluru_now = { lat: 22.7387315, lng: 121.0648241 };
+        async function move(){
+            for(var i=0;i<100;i++){
+                await  delay(0.1);
+                uluru_now.lat+=(uluru2.lat-uluru1.lat)/100;
+                uluru_now.lng+=(uluru2.lng-uluru1.lng)/100;
+                
+                var marker_temp = marker;
+                marker = new google.maps.Marker({
+                    position: uluru_now,
+                    map: map
+                });
+                marker1 = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+                await  delay(0.03);
+                marker_temp.setMap(null);
+            }
+            /*google.maps.event.removeListener(map, 'click', function (event) {
+                move();
+            });*/
+            mesh.removeEventListener("click", function(){move()}, false);
+        }
+        
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdVMrMODu3lC5KYhOuNkcat2fY9ljZhzw&callback=initMap">
+        </script>
+</body>
+
+</html>
