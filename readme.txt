@@ -1,0 +1,7 @@
+backend 是後端的資料夾，裡面的manage.py是伺服器的主程式
+
+hexapod 是KV260主要程式的資料夾，裡面的final_demo.py是KV260的主程式
+
+drone裡面有飛機上的程式碼，
+進入drone後，takeoff.py是飛機控制程式
+如果要建立飛機試飛模擬環境在linux上可以參考SITL_Simulator.txt

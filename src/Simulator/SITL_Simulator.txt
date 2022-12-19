@@ -1,0 +1,88 @@
+Software update：
+
+sudo apt-get update
+sudo apt-get upgrade
+
+
+Install and setup the environment of MAVproxy：
+
+sudo apt-get install python-dev dos2unix python-wxgtk3.0 python-pip g++ gawk ccache
+sudo pip install pymavlink
+sudo pip install mavproxy
+sudo apt-get install libexpat1-dev autoconf libtool automake
+
+
+Git command line install：
+
+sudo apt-get install git
+sudo apt-get install gitk git-gui
+
+
+Cloning Ardupilot repository：
+
+git clone https://github.com/ArduPilot/ardupilot.git
+cd ardupilot
+git submodule update --init --recursive
+
+
+Updating MAVProxy and pymavlink：
+
+pip install --upgrade pymavlink MAVProxy --user
+
+
+Install required packages：
+
+Tools/environment_install/install-prereqs-ubuntu.sh -y
+
+
+Reload the path (log-out and log-in to make permanent)：
+
+. ~/.profile
+
+
+===============================================================================
+
+Start SITL simulator:
+
+cd ArduCopter
+
+
+Then start the simulator using sim_vehicle.py. 
+(The first time you run it you should use the -w option to wipe the 
+virtual EEPROM and load the right default parameters for your vehicle.)
+
+sim_vehicle.py -w
+
+
+After the default parameters are loaded you can start the simulator normally. 
+First kill the sim_vehicle.py you are running using Ctrl-C. Then:
+
+sim_vehicle.py --console --map --osd
+
+===============================================================================
+
+Change to GUIDED mode, arm the throttle, and then takeoff :
+
+mode guided
+arm throttle
+takeoff 40
+
+
+Change to CIRCLE mode and set the radius to 2000cm :
+
+rc 3 1500
+mode circle
+param set circle_radius 2000
+
+
+When you’re ready to land you can set the mode to RTL (or LAND) :
+
+mode rtl
+
+
+===============================================================================
+
+參考資料：
+
+https://ardupilot.org/dev/docs/sitl-native-on-windows.html
+
