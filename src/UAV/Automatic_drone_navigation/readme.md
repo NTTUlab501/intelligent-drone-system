@@ -1,4 +1,4 @@
-1. 切換至hexapod/目錄下：cd hexapod/
+1. 切換至hexapod/目錄下：cd Automatic_drone_navigation/
 
 2. 安裝所需套件：pip install -r requirements
 
